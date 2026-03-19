@@ -482,7 +482,7 @@
 
 <!-- ===== STATS ===== -->
 <div class="stats">
-  <div class="stat-item"><strong>50+</strong><span>Trung tâm tin dùng</span></div>
+  <div class="stat-item"><strong>10+</strong><span>Trung tâm tin dùng</span></div>
   <div class="stat-item"><strong>2,000+</strong><span>Học viên quản lí</span></div>
   <div class="stat-item"><strong>99.9%</strong><span>Uptime đảm bảo</span></div>
   <div class="stat-item"><strong>24/7</strong><span>Hỗ trợ kĩ thuật</span></div>
@@ -502,7 +502,7 @@
     <div class="feature-card">
       <div class="feature-icon">💰</div>
       <h3>Thu học phí & Kế toán</h3>
-      <p>Quản lí thu chi, nhắc nợ học phí và báo cáo tài chính chi tiết.</p>
+      <p>Quản lí thu chi, nhắc nợ học phí và xuất báo cáo tài chính chi tiết.</p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">📊</div>
@@ -682,8 +682,16 @@
       <!-- TAB: REGISTRATIONS -->
       <div class="admin-section" id="tab-regs">
         <h3 style="font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:1rem;">Danh sách đăng kí dùng thử</h3>
-        <button class="export-btn" onclick="exportCSV()">📥 Xuất CSV</button>
-        <div id="regs-table-wrapper"></div>
+        <div style="background:var(--accent2);border:1.5px solid #b6d8f5;border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;">
+          <p style="font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:0.4rem;">📊 Dữ liệu lưu trên Google Sheets</p>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;">Mỗi khi có khách đăng kí, thông tin tự động ghi vào Google Sheets của bạn. Nhấn nút bên dưới để mở xem.</p>
+          <a id="sheets-link" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--success);color:#fff;padding:10px 22px;border-radius:50px;font-weight:700;font-size:0.9rem;text-decoration:none;">📋 Mở Google Sheets</a>
+        </div>
+        <div class="admin-form-group">
+          <label>Lưu link Google Sheets (để mở nhanh)</label>
+          <input type="text" id="a-sheets-url" placeholder="https://docs.google.com/spreadsheets/d/..." oninput="saveSheetsLink(this.value)">
+        </div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-top:0.5rem;">💡 Vào Google Sheets → copy link trên trình duyệt → dán vào đây.</p>
       </div>
 
       <!-- TAB: ACCOUNT -->
@@ -829,27 +837,61 @@ function closeTrial() {
   document.getElementById('trial-form-wrapper').style.display = 'block';
   document.getElementById('trial-success').style.display = 'none';
 }
+// ===== TELEGRAM CONFIG =====
+const TG_TOKEN   = '8155948015:AAGAb03Uzm8FanPMRCK2dkdOPf8cuzRtrRU';
+const TG_CHAT_ID = '5595638789';
+
+function sendTelegram(text) {
+  return fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: TG_CHAT_ID, text: text, parse_mode: 'HTML' })
+  });
+}
+
 function submitTrial() {
-  const name = document.getElementById('reg-name').value.trim();
-  const phone = document.getElementById('reg-phone').value.trim();
+  const name   = document.getElementById('reg-name').value.trim();
+  const phone  = document.getElementById('reg-phone').value.trim();
   const center = document.getElementById('reg-center').value.trim();
-  if (!name || !phone || !center) { alert('Vui lòng điền đầy đủ thông tin bắt buộc (*)'); return; }
-  const reg = {
-    id: Date.now(),
-    time: new Date().toLocaleString('vi-VN'),
-    name, phone,
-    email: document.getElementById('reg-email').value.trim(),
-    center,
-    pkg: document.getElementById('reg-package').value,
-    note: document.getElementById('reg-note').value.trim(),
-    status: 'Mới'
-  };
-  const regs = getRegs();
-  regs.unshift(reg);
-  save('ec_regs', regs);
-  document.getElementById('trial-form-wrapper').style.display = 'none';
-  document.getElementById('trial-success').style.display = 'block';
-  setTimeout(closeTrial, 3500);
+  if (!name || !phone || !center) {
+    alert('Vui lòng điền đầy đủ thông tin bắt buộc (*)');
+    return;
+  }
+
+  const submitBtn = document.querySelector('#trial-form-wrapper .btn-submit');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Đang gửi...';
+
+  const email = document.getElementById('reg-email').value.trim();
+  const pkg   = document.getElementById('reg-package').value;
+  const note  = document.getElementById('reg-note').value.trim();
+  const time  = new Date().toLocaleString('vi-VN');
+
+  const msg = '\uD83D\uDD14 <b>ĐĂNG KÍ DÙNG THỬ MỚI!</b>\n\n'
+    + '\uD83D\uDC64 <b>Họ tên:</b> ' + name + '\n'
+    + '\uD83D\uDCDE <b>SĐT:</b> ' + phone + '\n'
+    + '\uD83D\uDCE7 <b>Email:</b> ' + (email || '—') + '\n'
+    + '\uD83C\uDFEB <b>Trung tâm:</b> ' + center + '\n'
+    + '\uD83D\uDCE6 <b>Gói quan tâm:</b> ' + (pkg || '—') + '\n'
+    + '\uD83D\uDCDD <b>Ghi chú:</b> ' + (note || '—') + '\n'
+    + '\uD83D\uDD50 <b>Thời gian:</b> ' + time;
+
+  sendTelegram(msg)
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data.ok) {
+      document.getElementById('trial-form-wrapper').style.display = 'none';
+      document.getElementById('trial-success').style.display = 'block';
+      setTimeout(closeTrial, 3500);
+    } else {
+      throw new Error(data.description);
+    }
+  })
+  .catch(function(err) {
+    alert('Gửi thất bại. Vui lòng liên hệ trực tiếp qua SĐT.');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Gửi đăng kí ngay';
+  });
 }
 document.getElementById('trial-overlay').addEventListener('click', function(e) {
   if (e.target === this) closeTrial();
@@ -886,7 +928,7 @@ function doLogout() {
 // ===== ADMIN PANEL =====
 function showAdmin() {
   loadAdminFields();
-  renderRegsTable();
+  loadSheetsLink();
   document.getElementById('admin-overlay').classList.add('active');
 }
 function closeAdmin() { document.getElementById('admin-overlay').classList.remove('active'); }
@@ -901,7 +943,7 @@ function switchTab(name) {
   });
   document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
-  if (name === 'regs') renderRegsTable();
+  if (name === 'regs') loadSheetsLink();
 }
 
 function loadAdminFields() {
@@ -992,51 +1034,18 @@ function changePassword() {
   document.getElementById('a-confirmpass').value = '';
 }
 
-function renderRegsTable() {
-  const regs = getRegs();
-  const w = document.getElementById('regs-table-wrapper');
-  if (!regs.length) {
-    w.innerHTML = '<div class="no-reg">📭 Chưa có đăng kí nào.</div>'; return;
-  }
-  let html = `<table class="registrations-table">
-    <thead><tr>
-      <th>#</th><th>Thời gian</th><th>Họ tên</th><th>SĐT</th><th>Email</th><th>Trung tâm</th><th>Gói</th><th>Ghi chú</th><th></th>
-    </tr></thead><tbody>`;
-  regs.forEach((r, i) => {
-    html += `<tr>
-      <td>${regs.length - i}</td>
-      <td style="white-space:nowrap;font-size:0.82rem;">${r.time}</td>
-      <td><strong>${r.name}</strong></td>
-      <td><a href="tel:${r.phone.replace(/\s/g,'')}" style="color:var(--primary);font-weight:600;">${r.phone}</a></td>
-      <td>${r.email || '–'}</td>
-      <td>${r.center}</td>
-      <td>${r.pkg ? `<span class="tag-pkg">${r.pkg}</span>` : '–'}</td>
-      <td style="font-size:0.82rem;max-width:150px;">${r.note || '–'}</td>
-      <td><button class="del-btn" onclick="deleteReg(${r.id})" title="Xoá">🗑</button></td>
-    </tr>`;
-  });
-  html += '</tbody></table>';
-  w.innerHTML = html;
+function saveSheetsLink(url) {
+  localStorage.setItem('ec_sheets_url', url);
+  const link = document.getElementById('sheets-link');
+  if (link) link.href = url || '#';
 }
 
-function deleteReg(id) {
-  if (!confirm('Xoá đăng kí này?')) return;
-  const regs = getRegs().filter(r => r.id !== id);
-  save('ec_regs', regs);
-  renderRegsTable();
-}
-
-function exportCSV() {
-  const regs = getRegs();
-  if (!regs.length) { alert('Không có dữ liệu để xuất.'); return; }
-  let csv = 'STT,Thời gian,Họ tên,SĐT,Email,Trung tâm,Gói,Ghi chú\n';
-  regs.forEach((r, i) => {
-    csv += `${i+1},"${r.time}","${r.name}","${r.phone}","${r.email}","${r.center}","${r.pkg}","${r.note}"\n`;
-  });
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent('\uFEFF' + csv);
-  a.download = 'dangki_dungthu.csv';
-  a.click();
+function loadSheetsLink() {
+  const url = localStorage.getItem('ec_sheets_url') || '';
+  const inp = document.getElementById('a-sheets-url');
+  const link = document.getElementById('sheets-link');
+  if (inp) inp.value = url;
+  if (link) link.href = url || '#';
 }
 
 // ===== INIT =====
