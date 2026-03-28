@@ -237,7 +237,7 @@
   .pricing-card.featured .btn-pricing:hover { background: var(--accent); border-color: var(--accent); color: var(--dark); }
 
   /* ===== CONTACT ===== */
-  #contact { background: var(--white); }
+  #lienhe { background: var(--white); }
   .contact-wrapper {
     display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem;
     align-items: start;
@@ -356,7 +356,7 @@
   .admin-close:hover { background: rgba(255,255,255,0.25); }
   .admin-tabs {
     display: flex; border-bottom: 2px solid #e3eef8;
-    background: var(--bg);
+    background: var(--bg); flex-wrap: wrap;
   }
   .admin-tab {
     padding: 1rem 1.5rem; cursor: pointer;
@@ -387,31 +387,23 @@
     transition: background 0.2s; margin-top: 0.5rem;
   }
   .btn-save:hover { background: var(--primary-light); }
-  .registrations-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-  .registrations-table th {
-    background: var(--dark); color: rgba(255,255,255,0.85);
-    padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;
+
+  /* ===== WEB3FORMS SETUP BOX ===== */
+  .setup-box {
+    background: linear-gradient(135deg, #e8f4fd, #f0f8ff);
+    border: 2px solid #b6d8f5; border-radius: 14px;
+    padding: 1.5rem; margin-bottom: 1.5rem;
   }
-  .registrations-table td { padding: 10px 12px; border-bottom: 1px solid #e3eef8; vertical-align: top; }
-  .registrations-table tr:hover td { background: var(--accent2); }
-  .tag-pkg {
-    background: var(--accent2); color: var(--primary);
-    font-size: 0.75rem; font-weight: 700; padding: 2px 10px; border-radius: 50px;
+  .setup-box h4 { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem; }
+  .setup-box p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.8rem; }
+  .setup-box a { color: var(--primary); font-weight: 600; }
+  .key-status {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.82rem; font-weight: 700; padding: 4px 12px;
+    border-radius: 50px; margin-top: 0.5rem;
   }
-  .no-reg { text-align: center; color: var(--muted); padding: 2rem; font-size: 0.95rem; }
-  .del-btn {
-    background: none; border: none; color: #e74c3c;
-    cursor: pointer; font-size: 1rem; padding: 3px 6px; border-radius: 5px;
-    transition: background 0.15s;
-  }
-  .del-btn:hover { background: #fdecea; }
-  .export-btn {
-    background: var(--success); color: #fff;
-    border: none; padding: 8px 20px; border-radius: 50px;
-    font-weight: 700; font-size: 0.85rem; cursor: pointer;
-    transition: opacity 0.2s; margin-bottom: 1rem;
-  }
-  .export-btn:hover { opacity: 0.85; }
+  .key-status.ok { background: #d4edda; color: #155724; }
+  .key-status.missing { background: #fff3cd; color: #856404; }
 
   /* ===== LOGIN POPUP ===== */
   #login-overlay {
@@ -458,11 +450,11 @@
 
 <!-- ===== NAVBAR ===== -->
 <nav>
-  <div class="nav-logo">English<span>Learning</span> Hub</div>
+  <div class="nav-logo" id="nav-logo-text">English<span>Learning</span> Hub</div>
   <div class="nav-links">
     <a href="#features">Tính năng</a>
     <a href="#pricing">Bảng giá</a>
-    <a href="#lienhe" id="contact-link">Liên hệ</a>
+    <a href="#lienhe">Liên hệ</a>
     <a href="#" class="btn-nav" onclick="openTrial(); return false;">Dùng thử miễn phí</a>
   </div>
 </nav>
@@ -522,9 +514,7 @@
   <div class="section-tag">Bảng giá</div>
   <div class="section-title">Giá cả minh bạch,<br>không phát sinh chi phí</div>
   <p class="section-sub">Chọn gói phù hợp với quy mô trung tâm của bạn. Tất cả gói đều bao gồm đầy đủ tính năng.</p>
-  <div class="pricing-grid" id="pricing-grid">
-    <!-- Rendered by JS -->
-  </div>
+  <div class="pricing-grid" id="pricing-grid"></div>
 </section>
 
 <!-- ===== CONTACT ===== -->
@@ -532,11 +522,9 @@
   <div class="section-tag">Liên hệ</div>
   <div class="section-title">Chúng tôi luôn sẵn sàng<br>hỗ trợ bạn</div>
   <div class="contact-wrapper">
-    <div id="contact-info-block">
-      <!-- Rendered by JS -->
-    </div>
+    <div id="contact-info-block"></div>
     <div>
-      <a id="fb-link" href="#" target="_blank" class="social-fb" style="font-size:1rem;">
+      <a id="fb-link" href="#" target="_blank" class="social-fb">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         Fanpage Facebook của chúng tôi
       </a>
@@ -548,7 +536,7 @@
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- ===== FOOTER ===== */
 <footer>
   <p><strong id="footer-name"></strong> &copy; <span id="footer-year"></span> – Phần mềm quản lí trung tâm tiếng Anh</p>
   <p style="margin-top:0.4rem; font-size:0.82rem;">Thiết kế với ❤️ dành cho các trung tâm Việt Nam</p>
@@ -591,7 +579,7 @@
         <label>Ghi chú</label>
         <textarea id="reg-note" placeholder="Câu hỏi hoặc yêu cầu của bạn..."></textarea>
       </div>
-      <button class="btn-submit" onclick="submitTrial()">Gửi đăng kí ngay</button>
+      <button class="btn-submit" id="submit-btn" onclick="submitTrial()">Gửi đăng kí ngay</button>
     </div>
     <div class="success-msg" id="trial-success">
       <div class="checkmark">🎉</div>
@@ -630,10 +618,11 @@
     <div class="admin-tabs">
       <div class="admin-tab active" onclick="switchTab('info')">📋 Thông tin</div>
       <div class="admin-tab" onclick="switchTab('pricing')">💰 Bảng giá</div>
-      <div class="admin-tab" onclick="switchTab('regs')">📩 Đăng kí dùng thử</div>
+      <div class="admin-tab" onclick="switchTab('notify')">📧 Thông báo</div>
       <div class="admin-tab" onclick="switchTab('account')">🔑 Tài khoản</div>
     </div>
     <div class="admin-body">
+
       <!-- TAB: INFO -->
       <div class="admin-section active" id="tab-info">
         <h3 style="font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:1.2rem;">Thông tin liên hệ & Nội dung trang</h3>
@@ -679,19 +668,34 @@
         <span id="price-saved" style="display:none;margin-left:1rem;color:var(--success);font-size:0.88rem;font-weight:600;">✓ Đã lưu!</span>
       </div>
 
-      <!-- TAB: REGISTRATIONS -->
-      <div class="admin-section" id="tab-regs">
-        <h3 style="font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:1rem;">Danh sách đăng kí dùng thử</h3>
-        <div style="background:var(--accent2);border:1.5px solid #b6d8f5;border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;">
-          <p style="font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:0.4rem;">📊 Dữ liệu lưu trên Google Sheets</p>
-          <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;">Mỗi khi có khách đăng kí, thông tin tự động ghi vào Google Sheets của bạn. Nhấn nút bên dưới để mở xem.</p>
-          <a id="sheets-link" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--success);color:#fff;padding:10px 22px;border-radius:50px;font-weight:700;font-size:0.9rem;text-decoration:none;">📋 Mở Google Sheets</a>
+      <!-- TAB: NOTIFY (Web3Forms) -->
+      <div class="admin-section" id="tab-notify">
+        <h3 style="font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:1rem;">Cài đặt thông báo email (Web3Forms)</h3>
+
+        <div class="setup-box">
+          <h4>📧 Hướng dẫn lấy Access Key</h4>
+          <p>
+            1. Truy cập <a href="https://web3forms.com" target="_blank">web3forms.com</a><br>
+            2. Nhập email của bạn → nhấn <strong>"Create Access Key"</strong><br>
+            3. Kiểm tra hộp thư → copy key được gửi về email<br>
+            4. Dán key vào ô bên dưới → nhấn Lưu<br><br>
+            ✅ Mỗi lần có khách đăng kí, email thông báo sẽ tự động gửi vào hộp thư của bạn. Miễn phí 250 lần/tháng.
+          </p>
+          <div id="key-status-badge"></div>
+        </div>
+
+        <div class="admin-form-group">
+          <label>Web3Forms Access Key</label>
+          <input type="text" id="a-w3f-key" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" style="font-family:monospace;letter-spacing:0.5px;">
         </div>
         <div class="admin-form-group">
-          <label>Lưu link Google Sheets (để mở nhanh)</label>
-          <input type="text" id="a-sheets-url" placeholder="https://docs.google.com/spreadsheets/d/..." oninput="saveSheetsLink(this.value)">
+          <label>Email nhận thông báo (để trống = dùng email đăng kí Web3Forms)</label>
+          <input type="email" id="a-w3f-email" placeholder="trungtam@gmail.com">
         </div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-top:0.5rem;">💡 Vào Google Sheets → copy link trên trình duyệt → dán vào đây.</p>
+        <button class="btn-save" onclick="saveW3FConfig()">💾 Lưu cài đặt</button>
+        <button onclick="testW3F()" style="margin-left:0.8rem;background:none;border:2px solid var(--primary);color:var(--primary);padding:9px 20px;border-radius:50px;font-weight:700;cursor:pointer;font-size:0.88rem;font-family:inherit;">🧪 Gửi email thử</button>
+        <span id="notify-saved" style="display:none;margin-left:1rem;color:var(--success);font-size:0.88rem;font-weight:600;">✓ Đã lưu!</span>
+        <div id="test-result" style="margin-top:0.8rem;font-size:0.88rem;display:none;"></div>
       </div>
 
       <!-- TAB: ACCOUNT -->
@@ -720,6 +724,7 @@
           <button onclick="doLogout()" style="background:none;border:1.5px solid #e74c3c;color:#e74c3c;padding:9px 22px;border-radius:50px;font-weight:700;cursor:pointer;font-family:inherit;font-size:0.9rem;">🚪 Đăng xuất</button>
         </div>
       </div>
+
     </div>
   </div>
 </div>
@@ -728,50 +733,59 @@
 <button class="admin-trigger" onclick="openAdmin()">⚙ Quản trị</button>
 
 <script>
-// ===== DEFAULT DATA =====
+// ============================================================
+// DEFAULT DATA
+// ============================================================
 const defaultData = {
-  brand: "English Learning Hub",
-  phone: "0866 38 4404",
-  email: "englishlearninghub.site@gmail.com",
+  brand:   "English Learning Hub",
+  phone:   "0866 38 4404",
+  email:   "englishlearninghub.site@gmail.com",
   address: "",
-  fb: "https://www.facebook.com/profile.php?id=61578490526443",
-  hours: "Thứ 2 – Thứ 7: 8:00 – 18:00\nChủ nhật: 8:00 – 12:00",
-  herodesc: "Giải pháp toàn diện giúp trung tâm tiếng Anh quản lí học viên, thu học phí và báo cáo chỉ trong một nền tảng duy nhất.",
-  creds: { user: "admin", pass: "admin123" }
+  fb:      "https://www.facebook.com/profile.php?id=61578490526443",
+  hours:   "Thứ 2 – Thứ 7: 8:00 – 18:00\nChủ nhật: 8:00 – 12:00",
+  herodesc:"Giải pháp toàn diện giúp trung tâm tiếng Anh quản lí học viên, thu học phí và báo cáo chỉ trong một nền tảng duy nhất.",
+  creds:   { user: "admin", pass: "admin123" }
 };
 
 const defaultPricing = [
-  { period: "1 tháng", price: 120000, featured: false, savings: "" },
-  { period: "3 tháng", price: 350000, featured: false, savings: "Tiết kiệm 10.000đ" },
-  { period: "6 tháng", price: 650000, featured: true, savings: "Tiết kiệm 70.000đ" },
-  { period: "12 tháng", price: 1200000, featured: false, savings: "Tiết kiệm 240.000đ" },
+  { period:"1 tháng",  price:120000,  featured:false, savings:"" },
+  { period:"3 tháng",  price:350000,  featured:false, savings:"Tiết kiệm 10.000đ" },
+  { period:"6 tháng",  price:650000,  featured:true,  savings:"Tiết kiệm 70.000đ" },
+  { period:"12 tháng", price:1200000, featured:false, savings:"Tiết kiệm 240.000đ" },
 ];
 
-// ===== STORAGE HELPERS =====
+// ============================================================
+// STORAGE HELPERS
+// ============================================================
 function load(key, def) {
-  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch(e) { return def; }
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; }
+  catch(e) { return def; }
 }
 function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
 
-function getData() { return load('ec_data', defaultData); }
+function getData()    { return load('ec_data', defaultData); }
 function getPricing() { return load('ec_pricing', defaultPricing); }
-function getRegs() { return load('ec_regs', []); }
-function getCreds() { const d = getData(); return d.creds || defaultData.creds; }
+function getCreds()   { const d = getData(); return d.creds || defaultData.creds; }
 
-// ===== FORMAT PRICE =====
+// Web3Forms config
+function getW3FKey()   { return localStorage.getItem('ec_w3f_key')   || ''; }
+function getW3FEmail() { return localStorage.getItem('ec_w3f_email') || ''; }
+
+// ============================================================
+// FORMAT HELPERS
+// ============================================================
 function fmt(n) { return Number(n).toLocaleString('vi-VN') + 'đ'; }
-function perDay(price, months) {
-  const days = months * 30;
-  return Math.round(price / days);
-}
+function perDay(price, months) { return Math.round(price / (months * 30)); }
 
-// ===== RENDER PRICING SECTION =====
+// ============================================================
+// RENDER PRICING SECTION
+// ============================================================
 function renderPricing() {
   const plans = getPricing();
-  const grid = document.getElementById('pricing-grid');
+  const grid  = document.getElementById('pricing-grid');
   grid.innerHTML = '';
   plans.forEach(p => {
-    const months = parseInt(p.period);
+    const months   = parseInt(p.period);
     const dayPrice = perDay(p.price, months);
     grid.innerHTML += `
       <div class="pricing-card ${p.featured ? 'featured' : ''}">
@@ -780,7 +794,9 @@ function renderPricing() {
         <div class="pricing-price">${fmt(p.price)}</div>
         <div class="pricing-unit">/ ${p.period}</div>
         <div class="pricing-perday">≈ ${fmt(dayPrice)} / ngày</div>
-        ${p.savings ? `<p style="font-size:0.82rem;color:${p.featured?'rgba(255,255,255,0.7)':'var(--success)'};font-weight:600;margin-bottom:1rem;">🎁 ${p.savings}</p>` : '<div style="height:1.5rem"></div>'}
+        ${p.savings
+          ? `<p style="font-size:0.82rem;color:${p.featured?'rgba(255,255,255,0.7)':'var(--success)'};font-weight:600;margin-bottom:1rem;">🎁 ${p.savings}</p>`
+          : '<div style="height:1.5rem"></div>'}
         <ul class="pricing-features">
           <li>Toàn bộ tính năng</li>
           <li>Không giới hạn học viên</li>
@@ -792,7 +808,9 @@ function renderPricing() {
   });
 }
 
-// ===== RENDER CONTACT INFO =====
+// ============================================================
+// RENDER CONTACT INFO
+// ============================================================
 function renderContact() {
   const d = getData();
   document.getElementById('contact-info-block').innerHTML = `
@@ -806,17 +824,24 @@ function renderContact() {
     </div>
     <div class="contact-info-item">
       <div class="contact-icon">📍</div>
-      <div><h4>Địa chỉ</h4><p>${d.address}</p></div>
+      <div><h4>Địa chỉ</h4><p>${d.address || 'Đang cập nhật'}</p></div>
     </div>`;
-  document.getElementById('fb-link').href = d.fb || '#';
+  document.getElementById('fb-link').href        = d.fb || '#';
   document.getElementById('working-hours').textContent = d.hours;
-  document.getElementById('hero-desc').textContent = d.herodesc;
-  document.getElementById('footer-name').textContent = d.brand;
-  document.getElementById('footer-year').textContent = new Date().getFullYear();
-  document.querySelector('.nav-logo').innerHTML = `${(d.brand||'English Learning Hub').replace('Pro','<span>Pro</span>')}`;
+  document.getElementById('hero-desc').textContent     = d.herodesc;
+  document.getElementById('footer-name').textContent   = d.brand;
+  document.getElementById('footer-year').textContent   = new Date().getFullYear();
+
+  // Nav logo
+  const brand = d.brand || 'English Learning Hub';
+  const parts  = brand.split(' ');
+  const last   = parts.pop();
+  document.getElementById('nav-logo-text').innerHTML = parts.join(' ') + ' <span>' + last + '</span>';
 }
 
-// ===== TRIAL POPUP =====
+// ============================================================
+// TRIAL POPUP
+// ============================================================
 function openTrial() {
   document.getElementById('trial-overlay').classList.add('active');
   document.getElementById('trial-form-wrapper').style.display = 'block';
@@ -828,77 +853,92 @@ function openTrialWithPkg(pkg) {
 }
 function closeTrial() {
   document.getElementById('trial-overlay').classList.remove('active');
-  document.getElementById('reg-name').value = '';
-  document.getElementById('reg-phone').value = '';
-  document.getElementById('reg-email').value = '';
-  document.getElementById('reg-center').value = '';
+  ['reg-name','reg-phone','reg-email','reg-center','reg-note'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
   document.getElementById('reg-package').value = '';
-  document.getElementById('reg-note').value = '';
   document.getElementById('trial-form-wrapper').style.display = 'block';
   document.getElementById('trial-success').style.display = 'none';
-}
-// ===== TELEGRAM CONFIG =====
-const TG_TOKEN   = '8155948015:AAGAb03Uzm8FanPMRCK2dkdOPf8cuzRtrRU';
-const TG_CHAT_ID = '5595638789';
-
-function sendTelegram(text) {
-  return fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: TG_CHAT_ID, text: text, parse_mode: 'HTML' })
-  });
-}
-
-function submitTrial() {
-  const name   = document.getElementById('reg-name').value.trim();
-  const phone  = document.getElementById('reg-phone').value.trim();
-  const center = document.getElementById('reg-center').value.trim();
-  if (!name || !phone || !center) {
-    alert('Vui lòng điền đầy đủ thông tin bắt buộc (*)');
-    return;
-  }
-
-  const submitBtn = document.querySelector('#trial-form-wrapper .btn-submit');
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Đang gửi...';
-
-  const email = document.getElementById('reg-email').value.trim();
-  const pkg   = document.getElementById('reg-package').value;
-  const note  = document.getElementById('reg-note').value.trim();
-  const time  = new Date().toLocaleString('vi-VN');
-
-  const msg = '\uD83D\uDD14 <b>ĐĂNG KÍ DÙNG THỬ MỚI!</b>\n\n'
-    + '\uD83D\uDC64 <b>Họ tên:</b> ' + name + '\n'
-    + '\uD83D\uDCDE <b>SĐT:</b> ' + phone + '\n'
-    + '\uD83D\uDCE7 <b>Email:</b> ' + (email || '—') + '\n'
-    + '\uD83C\uDFEB <b>Trung tâm:</b> ' + center + '\n'
-    + '\uD83D\uDCE6 <b>Gói quan tâm:</b> ' + (pkg || '—') + '\n'
-    + '\uD83D\uDCDD <b>Ghi chú:</b> ' + (note || '—') + '\n'
-    + '\uD83D\uDD50 <b>Thời gian:</b> ' + time;
-
-  sendTelegram(msg)
-  .then(function(res) { return res.json(); })
-  .then(function(data) {
-    if (data.ok) {
-      document.getElementById('trial-form-wrapper').style.display = 'none';
-      document.getElementById('trial-success').style.display = 'block';
-      setTimeout(closeTrial, 3500);
-    } else {
-      throw new Error(data.description);
-    }
-  })
-  .catch(function(err) {
-    alert('Gửi thất bại. Vui lòng liên hệ trực tiếp qua SĐT.');
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Gửi đăng kí ngay';
-  });
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = false;
+  btn.textContent = 'Gửi đăng kí ngay';
 }
 document.getElementById('trial-overlay').addEventListener('click', function(e) {
   if (e.target === this) closeTrial();
 });
 
-// ===== LOGIN =====
+// ============================================================
+// SUBMIT VIA WEB3FORMS
+// ============================================================
+function submitTrial() {
+  const name   = document.getElementById('reg-name').value.trim();
+  const phone  = document.getElementById('reg-phone').value.trim();
+  const center = document.getElementById('reg-center').value.trim();
+
+  if (!name || !phone || !center) {
+    alert('Vui lòng điền đầy đủ thông tin bắt buộc (*)');
+    return;
+  }
+
+  const key = getW3FKey();
+  if (!key) {
+    alert('Chưa cấu hình Web3Forms Access Key.\nVào Quản trị → Tab "Thông báo" để thiết lập.');
+    return;
+  }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Đang gửi...';
+
+  const email   = document.getElementById('reg-email').value.trim();
+  const pkg     = document.getElementById('reg-package').value;
+  const note    = document.getElementById('reg-note').value.trim();
+  const toEmail = getW3FEmail();
+  const time    = new Date().toLocaleString('vi-VN');
+  const d       = getData();
+
+  const payload = {
+    access_key: key,
+    subject:    '🔔 Đăng kí dùng thử mới – ' + center,
+    from_name:  d.brand || 'English Learning Hub',
+    'Họ và tên':    name,
+    'Số điện thoại': phone,
+    'Email':         email  || '(không có)',
+    'Tên trung tâm': center,
+    'Gói quan tâm':  pkg    || '(chưa chọn)',
+    'Ghi chú':       note   || '(không có)',
+    'Thời gian':     time,
+  };
+  if (toEmail) payload.to = toEmail;
+
+  fetch('https://api.web3forms.com/submit', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body:    JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      document.getElementById('trial-form-wrapper').style.display = 'none';
+      document.getElementById('trial-success').style.display = 'block';
+      setTimeout(closeTrial, 3500);
+    } else {
+      throw new Error(data.message || 'Lỗi không xác định');
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert('Gửi thất bại. Vui lòng liên hệ trực tiếp qua SĐT hoặc kiểm tra lại Access Key.');
+    btn.disabled = false;
+    btn.textContent = 'Gửi đăng kí ngay';
+  });
+}
+
+// ============================================================
+// LOGIN
+// ============================================================
 let isLoggedIn = false;
+
 function openAdmin() {
   if (isLoggedIn) { showAdmin(); return; }
   document.getElementById('login-overlay').classList.add('active');
@@ -920,15 +960,13 @@ function doLogin() {
     document.getElementById('login-error').style.display = 'block';
   }
 }
-function doLogout() {
-  isLoggedIn = false;
-  closeAdmin();
-}
+function doLogout() { isLoggedIn = false; closeAdmin(); }
 
-// ===== ADMIN PANEL =====
+// ============================================================
+// ADMIN PANEL
+// ============================================================
 function showAdmin() {
   loadAdminFields();
-  loadSheetsLink();
   document.getElementById('admin-overlay').classList.add('active');
 }
 function closeAdmin() { document.getElementById('admin-overlay').classList.remove('active'); }
@@ -937,28 +975,32 @@ document.getElementById('admin-overlay').addEventListener('click', function(e) {
 });
 
 function switchTab(name) {
-  document.querySelectorAll('.admin-tab').forEach((t,i) => {
-    const names = ['info','pricing','regs','account'];
+  const names = ['info','pricing','notify','account'];
+  document.querySelectorAll('.admin-tab').forEach((t, i) => {
     t.classList.toggle('active', names[i] === name);
   });
   document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  if (name === 'regs') loadSheetsLink();
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'notify') renderKeyStatus();
 }
 
 function loadAdminFields() {
   const d = getData();
-  document.getElementById('a-brand').value = d.brand || '';
-  document.getElementById('a-phone').value = d.phone || '';
-  document.getElementById('a-email').value = d.email || '';
+  document.getElementById('a-brand').value   = d.brand   || '';
+  document.getElementById('a-phone').value   = d.phone   || '';
+  document.getElementById('a-email').value   = d.email   || '';
   document.getElementById('a-address').value = d.address || '';
-  document.getElementById('a-fb').value = d.fb || '';
-  document.getElementById('a-hours').value = d.hours || '';
-  document.getElementById('a-herodesc').value = d.herodesc || '';
+  document.getElementById('a-fb').value      = d.fb      || '';
+  document.getElementById('a-hours').value   = d.hours   || '';
+  document.getElementById('a-herodesc').value= d.herodesc|| '';
+
+  // Web3Forms fields
+  document.getElementById('a-w3f-key').value   = getW3FKey();
+  document.getElementById('a-w3f-email').value = getW3FEmail();
 
   // Pricing fields
   const plans = getPricing();
-  const pf = document.getElementById('pricing-admin-fields');
+  const pf    = document.getElementById('pricing-admin-fields');
   pf.innerHTML = '';
   plans.forEach((p, i) => {
     pf.innerHTML += `
@@ -979,7 +1021,7 @@ function loadAdminFields() {
           </div>
           <div class="admin-form-group" style="display:flex;align-items:center;gap:0.5rem;padding-top:1.5rem;">
             <input type="checkbox" id="ap-feat-${i}" ${p.featured?'checked':''} style="width:18px;height:18px;cursor:pointer;">
-            <label for="ap-feat-${i}" style="font-size:0.88rem;cursor:pointer;">Gói nổi bật (⭐ Phổ biến nhất)</label>
+            <label for="ap-feat-${i}" style="font-size:0.88rem;cursor:pointer;text-transform:none;letter-spacing:0;">Gói nổi bật (⭐ Phổ biến nhất)</label>
           </div>
         </div>
       </div>`;
@@ -987,71 +1029,141 @@ function loadAdminFields() {
 }
 
 function saveInfo() {
-  const d = getData();
-  d.brand = document.getElementById('a-brand').value;
-  d.phone = document.getElementById('a-phone').value;
-  d.email = document.getElementById('a-email').value;
-  d.address = document.getElementById('a-address').value;
-  d.fb = document.getElementById('a-fb').value;
-  d.hours = document.getElementById('a-hours').value;
-  d.herodesc = document.getElementById('a-herodesc').value;
+  const d      = getData();
+  d.brand      = document.getElementById('a-brand').value;
+  d.phone      = document.getElementById('a-phone').value;
+  d.email      = document.getElementById('a-email').value;
+  d.address    = document.getElementById('a-address').value;
+  d.fb         = document.getElementById('a-fb').value;
+  d.hours      = document.getElementById('a-hours').value;
+  d.herodesc   = document.getElementById('a-herodesc').value;
   save('ec_data', d);
   renderContact();
-  const msg = document.getElementById('info-saved');
-  msg.style.display = 'inline'; setTimeout(() => msg.style.display = 'none', 2000);
+  flashMsg('info-saved');
 }
 
 function savePricing() {
-  const plans = getPricing();
+  const plans   = getPricing();
   const updated = plans.map((p, i) => ({
-    period: document.getElementById(`ap-period-${i}`).value,
-    price: parseInt(document.getElementById(`ap-price-${i}`).value) || p.price,
-    savings: document.getElementById(`ap-save-${i}`).value,
+    period:   document.getElementById(`ap-period-${i}`).value,
+    price:    parseInt(document.getElementById(`ap-price-${i}`).value) || p.price,
+    savings:  document.getElementById(`ap-save-${i}`).value,
     featured: document.getElementById(`ap-feat-${i}`).checked,
   }));
   save('ec_pricing', updated);
   renderPricing();
-  const msg = document.getElementById('price-saved');
-  msg.style.display = 'inline'; setTimeout(() => msg.style.display = 'none', 2000);
+  flashMsg('price-saved');
+}
+
+function saveW3FConfig() {
+  const key   = document.getElementById('a-w3f-key').value.trim();
+  const email = document.getElementById('a-w3f-email').value.trim();
+  localStorage.setItem('ec_w3f_key',   key);
+  localStorage.setItem('ec_w3f_email', email);
+  renderKeyStatus();
+  flashMsg('notify-saved');
+}
+
+function renderKeyStatus() {
+  const key  = getW3FKey();
+  const el   = document.getElementById('key-status-badge');
+  if (!el) return;
+  // Also sync inputs
+  const ki = document.getElementById('a-w3f-key');
+  const ei = document.getElementById('a-w3f-email');
+  if (ki && !ki.value) ki.value = key;
+  if (ei && !ei.value) ei.value = getW3FEmail();
+
+  if (key) {
+    el.innerHTML = '<span class="key-status ok">✅ Access Key đã cài đặt – sẵn sàng nhận thông báo</span>';
+  } else {
+    el.innerHTML = '<span class="key-status missing">⚠️ Chưa có Access Key – đăng kí chưa gửi email được</span>';
+  }
+}
+
+function testW3F() {
+  const key   = getW3FKey();
+  const email = getW3FEmail();
+  const res   = document.getElementById('test-result');
+
+  if (!key) {
+    res.style.display = 'block';
+    res.style.color   = '#e74c3c';
+    res.textContent   = '❌ Chưa có Access Key. Nhập key và nhấn Lưu trước.';
+    return;
+  }
+
+  res.style.display = 'block';
+  res.style.color   = 'var(--muted)';
+  res.textContent   = '⏳ Đang gửi email thử...';
+
+  const d       = getData();
+  const payload = {
+    access_key: key,
+    subject:    '🧪 Email thử nghiệm – ' + (d.brand || 'English Learning Hub'),
+    from_name:  d.brand || 'English Learning Hub',
+    message:    'Đây là email kiểm tra từ trang quản trị English Learning Hub. Nếu bạn nhận được email này, hệ thống thông báo hoạt động tốt! ✅',
+  };
+  if (email) payload.to = email;
+
+  fetch('https://api.web3forms.com/submit', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body:    JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      res.style.color = 'var(--success)';
+      res.textContent = '✅ Gửi thành công! Kiểm tra hộp thư của bạn (kể cả thư mục Spam).';
+    } else {
+      res.style.color = '#e74c3c';
+      res.textContent = '❌ Lỗi: ' + (data.message || 'Key không hợp lệ');
+    }
+  })
+  .catch(() => {
+    res.style.color = '#e74c3c';
+    res.textContent = '❌ Không kết nối được. Kiểm tra mạng internet.';
+  });
 }
 
 function changePassword() {
-  const d = getData();
-  const c = d.creds || defaultData.creds;
+  const d    = getData();
+  const c    = d.creds || defaultData.creds;
   const oldp = document.getElementById('a-oldpass').value;
   const newu = document.getElementById('a-newuser').value.trim();
   const newp = document.getElementById('a-newpass').value;
-  const confp = document.getElementById('a-confirmpass').value;
-  const msg = document.getElementById('acc-msg');
-  if (oldp !== c.pass) { msg.style.display='inline'; msg.style.color='#e74c3c'; msg.textContent='❌ Mật khẩu cũ không đúng.'; return; }
-  if (newp && newp !== confp) { msg.style.display='inline'; msg.style.color='#e74c3c'; msg.textContent='❌ Mật khẩu mới không khớp.'; return; }
+  const conf = document.getElementById('a-confirmpass').value;
+  const msg  = document.getElementById('acc-msg');
+
+  if (oldp !== c.pass) {
+    msg.style.display = 'inline'; msg.style.color = '#e74c3c';
+    msg.textContent = '❌ Mật khẩu cũ không đúng.'; return;
+  }
+  if (newp && newp !== conf) {
+    msg.style.display = 'inline'; msg.style.color = '#e74c3c';
+    msg.textContent = '❌ Mật khẩu mới không khớp.'; return;
+  }
   d.creds = { user: newu || c.user, pass: newp || c.pass };
   save('ec_data', d);
-  msg.style.display='inline'; msg.style.color='var(--success)'; msg.textContent='✓ Cập nhật thành công!';
-  setTimeout(() => msg.style.display='none', 2500);
-  document.getElementById('a-oldpass').value = '';
-  document.getElementById('a-newpass').value = '';
-  document.getElementById('a-confirmpass').value = '';
+  msg.style.display = 'inline'; msg.style.color = 'var(--success)';
+  msg.textContent = '✓ Cập nhật thành công!';
+  setTimeout(() => msg.style.display = 'none', 2500);
+  ['a-oldpass','a-newpass','a-confirmpass'].forEach(id => document.getElementById(id).value = '');
 }
 
-function saveSheetsLink(url) {
-  localStorage.setItem('ec_sheets_url', url);
-  const link = document.getElementById('sheets-link');
-  if (link) link.href = url || '#';
+function flashMsg(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.display = 'inline';
+  setTimeout(() => el.style.display = 'none', 2000);
 }
 
-function loadSheetsLink() {
-  const url = localStorage.getItem('ec_sheets_url') || '';
-  const inp = document.getElementById('a-sheets-url');
-  const link = document.getElementById('sheets-link');
-  if (inp) inp.value = url;
-  if (link) link.href = url || '#';
-}
-
-// ===== INIT =====
+// ============================================================
+// INIT
+// ============================================================
 renderContact();
 renderPricing();
-document.getElementById('footer-year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
