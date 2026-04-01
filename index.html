@@ -764,7 +764,12 @@ function load(key, def) {
 function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
 
 function getData()    { return load('ec_data', defaultData); }
-function getPricing() { return load('ec_pricing', defaultPricing); }
+function getPricing() {
+  const saved = load('ec_pricing', null);
+  // Chỉ dùng localStorage nếu có dữ liệu hợp lệ (không rỗng)
+  if (saved && Array.isArray(saved) && saved.length > 0) return saved;
+  return defaultPricing;
+}
 function getCreds()   { const d = getData(); return d.creds || defaultData.creds; }
 
 // Web3Forms config
